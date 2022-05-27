@@ -11,6 +11,14 @@ h1 {
 	color: white;
 	}
 
+#calculate {
+    width: 270px;
+    border: 3px solid gray;
+    border-radius: 3px;
+    padding: 10px:
+    background-color: green;
+}
+
 #clear{
 width: 270px;
 border: 3px solid gray;
@@ -28,8 +36,6 @@ border: 3px solid skyblue;
 border-radius: 5px;
 padding: 20px;
 }
-
-
 
 input
 {
@@ -89,7 +95,7 @@ border: 5px solid black;
   <label for="bag_cargo">Misc Cargo (lbs):</label><br>
   <input class="number_input" id = "bag_cargo" type = "text" name = "bag_cargo_lbs" oninput> <br>
 
-  <input id="run_cargo_weight" type="button" value="run_cargo_weight" onclick="cargo_weight();" />
+  <input id="calculate" type="button" value="Calculate" onclick="cargo_weight();" />
 
   <script>
 
@@ -108,7 +114,8 @@ border: 5px solid black;
           }
           if(isNaN(parseInt(field_heavy_bags.value))) {
              field_heavy_bags.value = "";
-          }if(isNaN(parseInt(field_misc_cargo.value))) {
+          }
+          if(isNaN(parseInt(field_misc_cargo.value))) {
              field_misc_cargo.value = "";
           }
       }
@@ -148,6 +155,22 @@ border: 5px solid black;
 
       }
 
+      function clear_all() {
+
+          var the_form = document.forms["form1"];
+          var field_stand_bags = the_form.elements["bag_stand"];
+          var field_valet_bags = the_form.elements["bag_valet"];
+          var field_heavy_bags = the_form.elements["bag_heavy"];
+          var field_misc_cargo = the_form.elements["bag_cargo"];
+          var field_calc = the_form.elements["calc"];
+
+          field_stand_bags.value = "";
+          field_valet_bags.value = "";
+          field_heavy_bags.value = "";
+          field_misc_cargo.value = "";
+          field_calc.value = "";
+      }
+
     //  ver el = form.getElementById("run_function");
     //  if (el.addEventListener) el.addEventListener("click", cargo_weight, false);
     //  else if (el.attachEvent) el.attachEvent('onclick', cargo_weight);
@@ -155,7 +178,7 @@ border: 5px solid black;
   </script>
   <br>
   <!-- Display the Cancel button and erase all data entered by the user. -->
-  <input type = "button" value = "Clear All" onclick = "form1.answer.value = ' ' " id= "clear" >
+  <input type = "button" value = "Clear All" onclick = "clear_all()" id= "clear" >
   <br>
 
 </form>
