@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+<title> 'Aha! Cargo Bin Weight' </title>
+
+<style>
+h1 {
+	text-align: center;
+	padding: 23px;
+	background-color: skyblue;
+	color: white;
+	}
+
+#clear{
+width: 270px;
+border: 3px solid gray;
+	border-radius: 3px;
+	padding: 20px;
+	background-color: red;
+}
+
+.formstyle
+{
+width: 300px;
+height: 530px;
+margin: auto;
+border: 3px solid skyblue;
+border-radius: 5px;
+padding: 20px;
+}
+
+
+
+input
+{
+width: 20px;
+background-color: green;
+color: white;
+border: 3px solid gray;
+	border-radius: 5px;
+	padding: 26px;
+	margin: 5px;
+	font-size: 15px;
+}
+
+.number_input
+{
+width: 40px;
+background-color: blue;
+color: white;
+border: 3px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    font-size: 15px;
+}
+
+#calc{
+width: 250px;
+border: 5px solid black;
+	border-radius: 3px;
+	padding: 20px;
+	margin: auto;
+}
+
+</style>
+
+</head>
+<body>
+<h1> ExpressJet Cargo Bin Weight </h1>
+<div class= "formstyle">
+<form name = "form1">
+
+
+  <!-- This input box shows the button pressed by the user in calculator. -->
+  <input id = "calc" type ="text" name = "answer"> <br> <br>
+  <!-- Display the calculator button on the screen. -->
+  <!-- onclick() function display the number pressed by the user. -->
+
+  <label for="bag_stand">Standard Bags:</label><br>
+  <input class="number_input" id = "bag_stand" type = "text" name = "bag_standard_num"> <br>
+
+  <label for="bag_valet">Valet Bags:</label><br>
+  <input class="number_input" id = "bag_valet" type = "text" name = "bag_valet_num"> <br>
+
+  <label for="bag_heavy">Heavy Bags:</label><br>
+  <input class="number_input" id = "bag_heavy" type = "text" name = "bag_heavy_num" oninput> <br>
+
+  <label for="bag_cargo">Misc Cargo (lbs):</label><br>
+  <input class="number_input" id = "bag_cargo" type = "text" name = "bag_cargo_lbs" oninput> <br>
+
+  <input id="run_cargo_weight" type="button" value="run_cargo_weight" onclick="cargo_weight();" />
+
+  <script>
+
+      function cleanup_input() {
+          var the_form = document.forms["form1"];
+          var field_stand_bags = the_form.elements["bag_stand"];
+          var field_valet_bags = the_form.elements["bag_valet"];
+          var field_heavy_bags = the_form.elements["bag_heavy"];
+          var field_misc_cargo = the_form.elements["bag_cargo"];
+
+          if(isNaN(parseInt(field_stand_bags.value))) {
+             field_stand_bags.value = "";
+          }
+          if(isNaN(parseInt(field_valet_bags.value))) {
+             field_valet_bags.value = "";
+          }
+          if(isNaN(parseInt(field_heavy_bags.value))) {
+             field_heavy_bags.value = "";
+          }if(isNaN(parseInt(field_misc_cargo.value))) {
+             field_misc_cargo.value = "";
+          }
+      }
+
+      function cargo_weight() {
+          cleanup_input();
+
+          var the_form = document.forms["form1"];
+
+          var standard_bags = the_form.elements["bag_stand"];
+          var num_standard_bags = 0;
+          if(standard_bags.value!="") {
+              num_standard_bags = parseInt(standard_bags.value);
+          }
+
+          var valet_bags = the_form.elements["bag_valet"];
+          var num_valet_bags = 0;
+          if(valet_bags.value!="") {
+              num_valet_bags = parseInt(valet_bags.value);
+          }
+
+          var heavy_bags = the_form.elements["bag_heavy"];
+          var num_heavy_bags = 0;
+          if(heavy_bags.value!="") {
+              num_heavy_bags = parseInt(heavy_bags.value);
+          }
+
+          var cargo_lbs = the_form.elements["bag_cargo"];
+          var lbs_misc_cargo = 0;
+          if(cargo_lbs.value!="") {
+              lbs_misc_cargo = parseInt(cargo_lbs.value);
+          }
+
+          var total_cargo_weight = num_standard_bags*28 + num_valet_bags*20 + num_heavy_bags*56 + lbs_misc_cargo;
+          document.getElementById("calc").value = total_cargo_weight;
+          total_cargo_weight = 0;
+
+      }
+
+    //  ver el = form.getElementById("run_function");
+    //  if (el.addEventListener) el.addEventListener("click", cargo_weight, false);
+    //  else if (el.attachEvent) el.attachEvent('onclick', cargo_weight);
+    //form.getElementById("run_function").addEventListener("click", cargo_weight)
+  </script>
+  <br>
+  <!-- Display the Cancel button and erase all data entered by the user. -->
+  <input type = "button" value = "Clear All" onclick = "form1.answer.value = ' ' " id= "clear" >
+  <br>
+
+</form>
+</div>
+</body>
+</html>
