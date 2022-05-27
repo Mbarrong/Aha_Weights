@@ -12,10 +12,10 @@ h1 {
 	}
 
 #calculate {
-    width: 270px;
+    width: 150px;
     border: 3px solid gray;
     border-radius: 3px;
-    padding: 10px:
+    padding: 15px:
     background-color: green;
 }
 
@@ -39,31 +39,30 @@ padding: 20px;
 
 input
 {
-width: 20px;
-background-color: green;
-color: white;
-border: 3px solid gray;
+    width: 20px;
+    background-color: green;
+    color: white;
+    border: 3px solid gray;
 	border-radius: 5px;
 	padding: 26px;
 	margin: 5px;
 	font-size: 15px;
 }
 
-.number_input
-{
-width: 40px;
-background-color: blue;
-color: white;
-border: 3px solid gray;
+.number_input {
+    width: 40px;
+    background-color: slategray;
+    color: white;
+    border: 3px solid gray;
     border-radius: 5px;
     padding: 10px;
     margin: 5px;
     font-size: 15px;
 }
 
-#calc{
-width: 250px;
-border: 5px solid black;
+#answer{
+    width: 50px;
+    border: 5px solid black;
 	border-radius: 3px;
 	padding: 20px;
 	margin: auto;
@@ -78,10 +77,6 @@ border: 5px solid black;
 <form name = "form1">
 
 
-  <!-- This input box shows the button pressed by the user in calculator. -->
-  <input id = "calc" type ="text" name = "answer"> <br> <br>
-  <!-- Display the calculator button on the screen. -->
-  <!-- onclick() function display the number pressed by the user. -->
 
   <label for="bag_stand">Standard Bags:</label><br>
   <input class="number_input" id = "bag_stand" type = "text" name = "bag_standard_num"> <br>
@@ -96,6 +91,8 @@ border: 5px solid black;
   <input class="number_input" id = "bag_cargo" type = "text" name = "bag_cargo_lbs" oninput> <br>
 
   <input id="calculate" type="button" value="Calculate" onclick="cargo_weight();" />
+
+  <input id = "answer" type ="text" name = "answer"> <br>
 
   <script>
 
@@ -150,7 +147,7 @@ border: 5px solid black;
           }
 
           var total_cargo_weight = num_standard_bags*28 + num_valet_bags*20 + num_heavy_bags*56 + lbs_misc_cargo;
-          document.getElementById("calc").value = total_cargo_weight;
+          document.getElementById("answer").value = total_cargo_weight;
           total_cargo_weight = 0;
 
       }
@@ -162,7 +159,7 @@ border: 5px solid black;
           var field_valet_bags = the_form.elements["bag_valet"];
           var field_heavy_bags = the_form.elements["bag_heavy"];
           var field_misc_cargo = the_form.elements["bag_cargo"];
-          var field_calc = the_form.elements["calc"];
+          var field_calc = the_form.elements["answer"];
 
           field_stand_bags.value = "";
           field_valet_bags.value = "";
