@@ -6,7 +6,8 @@
 <style>
 h1 {
 	text-align: center;
-	padding: 23px;
+	font-size: 20px;
+	padding: 5px;
 	background-color: skyblue;
 	color: white;
 	}
@@ -19,7 +20,7 @@ h1 {
     width: 100px;
     border: 3px solid gray;
     border-radius: 3px;
-    padding: 5px;
+    padding: 10px;
 	background-color: seagreen;
 }
 
@@ -30,7 +31,7 @@ h1 {
     width: 270px;
     border: 3px solid gray;
 	border-radius: 3px;
-	padding: 20px;
+	padding: 10px;
 	background-color: sienna;
 }
 
@@ -63,7 +64,7 @@ padding: 20px;
     background-color: slategray;
     border: 3px solid gray;
 	border-radius: 3px;
-	padding: 5px;
+	padding: 7px;
 	margin: auto;
 }
 
@@ -75,21 +76,29 @@ padding: 20px;
 <div class= "formstyle">
 <form name = "form1">
 
-  <label for="bag_stand">Standard Bags:</label><br>
-  <input class="number_input" id="bag_stand" type="text" name="bag_standard_num"> <br>
+  <label for="bag_stand">Standard Bags:</label>
+  <input class="number_input" id="bag_stand" type="text" name="bag_standard_num" onkeyup="return cargo_weight()" /> <br>
 
-  <label for="bag_valet">Valet Bags:</label><br>
-  <input class="number_input" id="bag_valet" type="text" name="bag_valet_num"> <br>
+  <label for="bag_valet">Valet Bags:</label>
+  <input class="number_input" id="bag_valet" type="text" name="bag_valet_num" onkeyup="return cargo_weight()" /> <br>
 
-  <label for="bag_heavy">Heavy Bags:</label><br>
-  <input class="number_input" id="bag_heavy" type="text" name="bag_heavy_num" oninput> <br>
+  <label for="bag_heavy">Heavy Bags:</label>
+  <input class="number_input" id="bag_heavy" type="text" name="bag_heavy_num" onkeyup="return cargo_weight()" /> <br>
 
-  <label for="bag_cargo">Misc Cargo (lbs):</label><br>
-  <input class="number_input" id="bag_cargo" type="text" name="bag_cargo_lbs" oninput> <br>
+  <label for="bag_cargo">Misc Cargo (lbs):</label>
+  <input class="number_input" id="bag_cargo" type="text" name="bag_cargo_lbs" onkeyup="return cargo_weight()" /> <br>
+  <hr>
 
-  <input id="calculate" type="button" value="Calculate" onclick="cargo_weight();" />
+  <label>Total cargo weight: </label>
+  <!--<input id="calculate" type="button" value="Calculate" onclick="cargo_weight();" />-->
 
-  <input id="answer" type="text" name="answer"> <br>
+  <input id="answer" type="text" name="answer" onkeyup="return cargo_weight()" /> <br> <br>
+
+  <label>Pax: </label>
+  <input class="number_input" id="pax_num" type="text" name="pax_num" onkeyup="return cargo_weight()" />
+  <label>PI lbs:</label>
+  <input class="number_input" id="pi_lbs" type="text" name="pi_lbs" onkeyup="return cargo_weight()" /> <br><br>
+
 
   <script>
 
@@ -99,6 +108,7 @@ padding: 20px;
           var field_valet_bags = the_form.elements["bag_valet"];
           var field_heavy_bags = the_form.elements["bag_heavy"];
           var field_misc_cargo = the_form.elements["bag_cargo"];
+          var field_pax_num = the_form.elements["pax_num"];
 
           if(isNaN(parseInt(field_stand_bags.value))) {
              field_stand_bags.value = "";
@@ -111,6 +121,9 @@ padding: 20px;
           }
           if(isNaN(parseInt(field_misc_cargo.value))) {
              field_misc_cargo.value = "";
+          }
+          if(isNaN(parseInt(field_pax_num.value))) {
+             field_pax_num.value = "";
           }
       }
 
@@ -145,10 +158,18 @@ padding: 20px;
 
           var total_cargo_weight = num_standard_bags*28 + num_valet_bags*20 + num_heavy_bags*56 + lbs_misc_cargo;
           document.getElementById("answer").value = total_cargo_weight;
-          total_cargo_weight = 0;
+
+          var pax_num_field = the_form.elements["pax_num"];
+          var number_of_passengers = 0
+          if(pax_num_field.value!="") {
+              number_of_passengers = parseInt(pax_num_field.value);
+          }
+
+          var pi_weight = number_of_passengers*11;
+          var pi_lbs = the_form.elements["pi_lbs"];
+          pi_lbs.value = pi_weight;
 
       }
-
       function clear_all() {
 
           var the_form = document.forms["form1"];
@@ -157,12 +178,16 @@ padding: 20px;
           var field_heavy_bags = the_form.elements["bag_heavy"];
           var field_misc_cargo = the_form.elements["bag_cargo"];
           var field_calc = the_form.elements["answer"];
+          var field_pax_num = the_form.elements["pax_num"];
+          var field_pi_lbs = the_form.elements["pi_lbs"];
 
           field_stand_bags.value = "";
           field_valet_bags.value = "";
           field_heavy_bags.value = "";
           field_misc_cargo.value = "";
           field_calc.value = "";
+          field_pax_num.value = "";
+          field_pi_lbs.value = "";
       }
 
     //  ver el = form.getElementById("run_function");
