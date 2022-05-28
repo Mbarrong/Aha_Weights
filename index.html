@@ -84,16 +84,16 @@ padding: 20px;
 <form name = "form1">
 
   <label class="weight_label" for="bag_stand">Standard Bags:</label>
-  <input class="number_input" id="bag_stand" type="text" name="bag_standard_num" onkeyup="return cargo_weight()" /> <br>
+  <input class="number_input" id="bag_stand" type="text" name="bag_standard_num" onkeyup="return cargo_weight()" onfocus="return clear_input(this)"/> <br>
 
   <label class="weight_label" for="bag_valet">Valet Bags:</label>
-  <input class="number_input" id="bag_valet" type="text" name="bag_valet_num" onkeyup="return cargo_weight()" /> <br>
+  <input class="number_input" id="bag_valet" type="text" name="bag_valet_num" onkeyup="return cargo_weight()" onfocus="return clear_input(this)"/> <br>
 
   <label class="weight_label" for="bag_heavy">Heavy Bags:</label>
-  <input class="number_input" id="bag_heavy" type="text" name="bag_heavy_num" onkeyup="return cargo_weight()" /> <br>
+  <input class="number_input" id="bag_heavy" type="text" name="bag_heavy_num" onkeyup="return cargo_weight()" onfocus="return clear_input(this)"/> <br>
 
   <label class="weight_label" for="bag_cargo">Misc Cargo (lbs):</label>
-  <input class="number_input" id="bag_cargo" type="text" name="bag_cargo_lbs" onkeyup="return cargo_weight()" /> <br>
+  <input class="number_input" id="bag_cargo" type="text" name="bag_cargo_lbs" onkeyup="return cargo_weight()" onfocus="return clear_input(this)"/> <br>
   <hr>
 
   <label class="weight_label">Total cargo weight: </label>
@@ -102,7 +102,7 @@ padding: 20px;
   <input class="answer" id="answer" type="text" name="answer" onkeyup="return cargo_weight()" /> <br> <br>
 
   <label>Pax: </label>
-  <input class="number_input" id="pax_num" type="text" name="pax_num" onkeyup="return cargo_weight()" />
+  <input class="number_input" id="pax_num" type="text" name="pax_num" onkeyup="return cargo_weight()" onfocus="return clear_input(this)"/>
   <label>PI lbs:</label>
   <input class="answer" id="pi_lbs" type="text" name="pi_lbs" onkeyup="return cargo_weight()" /> <br><br>
 
@@ -177,6 +177,13 @@ padding: 20px;
           pi_lbs.value = pi_weight;
 
       }
+
+      function clear_input(cell_to_clear) {
+          cell_to_clear.value = "";
+          cargo_weight();
+      }
+
+
       function clear_all() {
 
           var the_form = document.forms["form1"];
