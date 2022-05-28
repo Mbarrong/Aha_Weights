@@ -64,7 +64,7 @@ padding: 20px;
     width: 200px;
 }
 
-#answer{
+.answer{
 	text-align: center;
     font-size: 20px;
     width: 50px;
@@ -99,12 +99,12 @@ padding: 20px;
   <label class="weight_label">Total cargo weight: </label>
   <!--<input id="calculate" type="button" value="Calculate" onclick="cargo_weight();" />-->
 
-  <input id="answer" type="text" name="answer" onkeyup="return cargo_weight()" /> <br> <br>
+  <input class="answer" id="answer" type="text" name="answer" onkeyup="return cargo_weight()" /> <br> <br>
 
   <label>Pax: </label>
   <input class="number_input" id="pax_num" type="text" name="pax_num" onkeyup="return cargo_weight()" />
   <label>PI lbs:</label>
-  <input class="number_input" id="pi_lbs" type="text" name="pi_lbs" onkeyup="return cargo_weight()" /> <br><br>
+  <input class="answer" id="pi_lbs" type="text" name="pi_lbs" onkeyup="return cargo_weight()" /> <br><br>
 
 
   <script>
