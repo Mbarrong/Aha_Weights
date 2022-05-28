@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-<title> 'Aha! Cargo Bin Weight' </title>
+<title> 'Aha! Weights' </title>
 
 <style>
 h1 {
@@ -38,7 +38,7 @@ h1 {
 .formstyle
 {
 width: 300px;
-height: 530px;
+height: 450px;
 margin: auto;
 border: 3px solid skyblue;
 border-radius: 5px;
@@ -57,6 +57,11 @@ padding: 20px;
     font-size: 15px;
 }
 
+.weight_label {
+    display: inline-block;
+    width: 200px;
+}
+
 #answer{
 	text-align: center;
     font-size: 20px;
@@ -72,24 +77,24 @@ padding: 20px;
 
 </head>
 <body>
-<h1> ExpressJet Cargo Bin Weight </h1>
+<h1> Aha! Weights </h1>
 <div class= "formstyle">
 <form name = "form1">
 
-  <label for="bag_stand">Standard Bags:</label>
+  <label class="weight_label" for="bag_stand">Standard Bags:</label>
   <input class="number_input" id="bag_stand" type="text" name="bag_standard_num" onkeyup="return cargo_weight()" /> <br>
 
-  <label for="bag_valet">Valet Bags:</label>
+  <label class="weight_label" for="bag_valet">Valet Bags:</label>
   <input class="number_input" id="bag_valet" type="text" name="bag_valet_num" onkeyup="return cargo_weight()" /> <br>
 
-  <label for="bag_heavy">Heavy Bags:</label>
+  <label class="weight_label" for="bag_heavy">Heavy Bags:</label>
   <input class="number_input" id="bag_heavy" type="text" name="bag_heavy_num" onkeyup="return cargo_weight()" /> <br>
 
-  <label for="bag_cargo">Misc Cargo (lbs):</label>
+  <label class="weight_label" for="bag_cargo">Misc Cargo (lbs):</label>
   <input class="number_input" id="bag_cargo" type="text" name="bag_cargo_lbs" onkeyup="return cargo_weight()" /> <br>
   <hr>
 
-  <label>Total cargo weight: </label>
+  <label class="weight_label">Total cargo weight: </label>
   <!--<input id="calculate" type="button" value="Calculate" onclick="cargo_weight();" />-->
 
   <input id="answer" type="text" name="answer" onkeyup="return cargo_weight()" /> <br> <br>
