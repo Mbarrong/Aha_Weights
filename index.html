@@ -29,7 +29,7 @@
         height: 450px;
         margin: auto;
         border: 3px solid skyblue;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 20px;
     }
 
@@ -73,26 +73,33 @@
         var field_misc_cargo = the_form.elements["bag_cargo"];
         var field_pax_num = the_form.elements["pax_num"];
 
+        field_stand_bags.value = field_stand_bags.value.split(" ").join("");
         if(isNaN(parseInt(field_stand_bags.value))) {
            field_stand_bags.value = "";
         }
+
+        field_valet_bags.value = field_valet_bags.value.split(" ").join("");
         if(isNaN(parseInt(field_valet_bags.value))) {
            field_valet_bags.value = "";
         }
+
+        field_heavy_bags.value = field_heavy_bags.value.split(" ").join("");
         if(isNaN(parseInt(field_heavy_bags.value))) {
            field_heavy_bags.value = "";
         }
+
+        field_misc_cargo.value = field_misc_cargo.value.split(" ").join("");
         if(isNaN(parseInt(field_misc_cargo.value))) {
            field_misc_cargo.value = "";
         }
+
+        field_pax_num.value = field_pax_num.value.split(" ").join("");
         if(isNaN(parseInt(field_pax_num.value))) {
            field_pax_num.value = "";
         }
     }
 
     function cargo_weight() {
-        cleanup_input();
-
         var the_form = document.forms["form1"];
 
         var standard_bags = the_form.elements["bag_stand"];
@@ -121,7 +128,16 @@
 
         var total_cargo_weight = num_standard_bags*28 + num_valet_bags*20 + num_heavy_bags*56 + lbs_misc_cargo;
         document.getElementById("answer").value = total_cargo_weight;
+    }
 
+    function calculate_all() {
+        cleanup_input();
+        cargo_weight();
+        personal_item_weight();
+    }
+
+    function personal_item_weight() {
+        var the_form = document.forms["form1"];
         var pax_num_field = the_form.elements["pax_num"];
         var number_of_passengers = 0
         if(pax_num_field.value!="") {
@@ -132,7 +148,6 @@
         var pi_lbs = the_form.elements["pi_lbs"];
         pi_lbs.value = pi_weight;
     }
-
 
     function clear_all() {
 
@@ -170,7 +185,7 @@
                    id="bag_stand"
                    type="tel"
                    name="bag_standard_num"
-                   onkeyup="return cargo_weight()"
+                   onkeyup="return calculate_all()"
                    onfocus="this.select()"/> <br>
 
             <label class="weight_label" for="bag_valet">Valet Bags:</label>
@@ -178,7 +193,7 @@
                    id="bag_valet"
                    type="tel"
                    name="bag_valet_num"
-                   onkeyup="return cargo_weight()"
+                   onkeyup="return calculate_all()"
                    onfocus="this.select()"/> <br>
 
             <label class="weight_label" for="bag_heavy">Heavy Bags:</label>
@@ -186,7 +201,7 @@
                    id="bag_heavy"
                    type="tel"
                    name="bag_heavy_num"
-                   onkeyup="return cargo_weight()"
+                   onkeyup="return calculate_all()"
                    onfocus="this.select()"/> <br>
 
             <label class="weight_label" for="bag_cargo">Misc Cargo (lbs):</label>
@@ -194,7 +209,7 @@
                    id="bag_cargo"
                    type="tel"
                    name="bag_cargo_lbs"
-                   onkeyup="return cargo_weight()"
+                   onkeyup="return calculate_all()"
                    onfocus="this.select()"/> <br>
             <hr>
 
@@ -203,7 +218,7 @@
                    id="answer"
                    type="tel"
                    name="answer"
-                   onkeyup="return cargo_weight()" /> <br>
+                   onkeyup="return calculate_all()" /> <br>
 
             <br>
 
@@ -212,7 +227,7 @@
                    id="pax_num"
                    type="tel"
                    name="pax_num"
-                   onkeyup="return cargo_weight()"
+                   onkeyup="return calculate_all()"
                    onfocus="this.select()"/>
 
             <label>PI lbs:</label>
@@ -220,11 +235,9 @@
                    id="pi_lbs"
                    type="tel"
                    name="pi_lbs"
-                   onkeyup="return cargo_weight()" /> <br>
+                   onkeyup="return calculate_all()" /> <br>
 
             <br>
-
-
             <br>
 
             <input type="button" value="Clear All" onclick="clear_all()" id= "clear" >
