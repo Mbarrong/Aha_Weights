@@ -1,234 +1,235 @@
 <!DOCTYPE html>
 <html lang = "en">
-<head>
-<title> 'Aha! Weights' </title>
 
 <style>
-h1 {
-    text-align: center;
-    font-size: 20px;
-    padding: 5px;
-    background-color: skyblue;
-    color: white;
+    h1 {
+        text-align: center;
+        font-size: 20px;
+        padding: 5px;
+        background-color: skyblue;
+        color: white;
+        }
+
+    #clear{
+        position: relative;
+        left:10%;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+        width: 80%;
+        border: 3px solid gray;
+        border-radius: 3px;
+        padding: 10px;
+        background-color: sienna;
     }
 
-#clear{
-    position: relative;
-    left:10%;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    width: 80%;
-    border: 3px solid gray;
-    border-radius: 3px;
-    padding: 10px;
-    background-color: sienna;
-}
+    .formstyle
+    {
+        width: 300px;
+        height: 450px;
+        margin: auto;
+        border: 3px solid skyblue;
+        border-radius: 5px;
+        padding: 20px;
+    }
 
-.formstyle
-{
-    width: 300px;
-    height: 450px;
-    margin: auto;
-    border: 3px solid skyblue;
-    border-radius: 5px;
-    padding: 20px;
-}
+    .number_input {
+        text-align: center;
+        width: 40px;
+        background-color: slategray;
+        color: white;
+        border: 3px solid gray;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 5px;
+        font-size: 15px;
+    }
 
-.number_input {
-    text-align: center;
-    width: 40px;
-    background-color: slategray;
-    color: white;
-    border: 3px solid gray;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 5px;
-    font-size: 15px;
-}
+    .weight_label {
+        display: inline-block;
+        width: 200px;
+    }
 
-.weight_label {
-    display: inline-block;
-    width: 200px;
-}
-
-.answer{
-    text-align: center;
-    font-size: 25px;
-    width: 60px;
-    background-color: black;
-    color: white;
-    border: 3px solid gray;
-    border-radius: 3px;
-    padding: 7px;
-    margin: auto;
-}
-
+    .answer{
+        text-align: center;
+        font-size: 25px;
+        width: 60px;
+        background-color: black;
+        color: white;
+        border: 3px solid gray;
+        border-radius: 3px;
+        padding: 7px;
+        margin: auto;
+    }
 </style>
 
+<script>
+
+    function cleanup_input() {
+        var the_form = document.forms["form1"];
+        var field_stand_bags = the_form.elements["bag_stand"];
+        var field_valet_bags = the_form.elements["bag_valet"];
+        var field_heavy_bags = the_form.elements["bag_heavy"];
+        var field_misc_cargo = the_form.elements["bag_cargo"];
+        var field_pax_num = the_form.elements["pax_num"];
+
+        if(isNaN(parseInt(field_stand_bags.value))) {
+           field_stand_bags.value = "";
+        }
+        if(isNaN(parseInt(field_valet_bags.value))) {
+           field_valet_bags.value = "";
+        }
+        if(isNaN(parseInt(field_heavy_bags.value))) {
+           field_heavy_bags.value = "";
+        }
+        if(isNaN(parseInt(field_misc_cargo.value))) {
+           field_misc_cargo.value = "";
+        }
+        if(isNaN(parseInt(field_pax_num.value))) {
+           field_pax_num.value = "";
+        }
+    }
+
+    function cargo_weight() {
+        cleanup_input();
+
+        var the_form = document.forms["form1"];
+
+        var standard_bags = the_form.elements["bag_stand"];
+        var num_standard_bags = 0;
+        if(standard_bags.value!="") {
+            num_standard_bags = parseInt(standard_bags.value);
+        }
+
+        var valet_bags = the_form.elements["bag_valet"];
+        var num_valet_bags = 0;
+        if(valet_bags.value!="") {
+            num_valet_bags = parseInt(valet_bags.value);
+        }
+
+        var heavy_bags = the_form.elements["bag_heavy"];
+        var num_heavy_bags = 0;
+        if(heavy_bags.value!="") {
+            num_heavy_bags = parseInt(heavy_bags.value);
+        }
+
+        var cargo_lbs = the_form.elements["bag_cargo"];
+        var lbs_misc_cargo = 0;
+        if(cargo_lbs.value!="") {
+            lbs_misc_cargo = parseInt(cargo_lbs.value);
+        }
+
+        var total_cargo_weight = num_standard_bags*28 + num_valet_bags*20 + num_heavy_bags*56 + lbs_misc_cargo;
+        document.getElementById("answer").value = total_cargo_weight;
+
+        var pax_num_field = the_form.elements["pax_num"];
+        var number_of_passengers = 0
+        if(pax_num_field.value!="") {
+            number_of_passengers = parseInt(pax_num_field.value);
+        }
+
+        var pi_weight = number_of_passengers*11;
+        var pi_lbs = the_form.elements["pi_lbs"];
+        pi_lbs.value = pi_weight;
+    }
+
+
+    function clear_all() {
+
+        var the_form = document.forms["form1"];
+        var field_stand_bags = the_form.elements["bag_stand"];
+        var field_valet_bags = the_form.elements["bag_valet"];
+        var field_heavy_bags = the_form.elements["bag_heavy"];
+        var field_misc_cargo = the_form.elements["bag_cargo"];
+        var field_calc = the_form.elements["answer"];
+        var field_pax_num = the_form.elements["pax_num"];
+        var field_pi_lbs = the_form.elements["pi_lbs"];
+
+        field_stand_bags.value = "";
+        field_valet_bags.value = "";
+        field_heavy_bags.value = "";
+        field_misc_cargo.value = "";
+        field_calc.value = "";
+        field_pax_num.value = "";
+        field_pi_lbs.value = "";
+    }
+
+</script>
+
+<title> 'Aha! Weights' </title>
+
+<head>
 </head>
+
 <body>
-<h1> Aha! Weights </h1>
-<div class= "formstyle">
-    <form name = "form1">
+    <div class= "formstyle">
+        <form name = "form1">
 
-        <label class="weight_label" for="bag_stand">Standard Bags:</label>
-        <input class="number_input"
-               id="bag_stand"
-               type="tel"
-               name="bag_standard_num"
-               onkeyup="return cargo_weight()"
-               onfocus="this.select()"/> <br>
+            <label class="weight_label" for="bag_stand">Standard Bags:</label>
+            <input class="number_input"
+                   id="bag_stand"
+                   type="tel"
+                   name="bag_standard_num"
+                   onkeyup="return cargo_weight()"
+                   onfocus="this.select()"/> <br>
 
-        <label class="weight_label" for="bag_valet">Valet Bags:</label>
-        <input class="number_input"
-               id="bag_valet"
-               type="tel"
-               name="bag_valet_num"
-               onkeyup="return cargo_weight()"
-               onfocus="this.select()"/> <br>
+            <label class="weight_label" for="bag_valet">Valet Bags:</label>
+            <input class="number_input"
+                   id="bag_valet"
+                   type="tel"
+                   name="bag_valet_num"
+                   onkeyup="return cargo_weight()"
+                   onfocus="this.select()"/> <br>
 
-        <label class="weight_label" for="bag_heavy">Heavy Bags:</label>
-        <input class="number_input"
-               id="bag_heavy"
-               type="tel"
-               name="bag_heavy_num"
-               onkeyup="return cargo_weight()"
-               onfocus="this.select()"/> <br>
+            <label class="weight_label" for="bag_heavy">Heavy Bags:</label>
+            <input class="number_input"
+                   id="bag_heavy"
+                   type="tel"
+                   name="bag_heavy_num"
+                   onkeyup="return cargo_weight()"
+                   onfocus="this.select()"/> <br>
 
-        <label class="weight_label" for="bag_cargo">Misc Cargo (lbs):</label>
-        <input class="number_input"
-               id="bag_cargo"
-               type="tel"
-               name="bag_cargo_lbs"
-               onkeyup="return cargo_weight()"
-               onfocus="this.select()"/> <br>
-        <hr>
+            <label class="weight_label" for="bag_cargo">Misc Cargo (lbs):</label>
+            <input class="number_input"
+                   id="bag_cargo"
+                   type="tel"
+                   name="bag_cargo_lbs"
+                   onkeyup="return cargo_weight()"
+                   onfocus="this.select()"/> <br>
+            <hr>
 
-        <label class="weight_label">Total cargo weight: </label>
-        <input class="answer"
-               id="answer"
-               type="tel"
-               name="answer"
-               onkeyup="return cargo_weight()" /> <br>
+            <label class="weight_label">Total cargo weight: </label>
+            <input class="answer"
+                   id="answer"
+                   type="tel"
+                   name="answer"
+                   onkeyup="return cargo_weight()" /> <br>
 
-        <br>
+            <br>
 
-        <label>Pax: </label>
-        <input class="number_input"
-               id="pax_num"
-               type="tel"
-               name="pax_num"
-               onkeyup="return cargo_weight()"
-               onfocus="this.select()"/>
+            <label>Pax: </label>
+            <input class="number_input"
+                   id="pax_num"
+                   type="tel"
+                   name="pax_num"
+                   onkeyup="return cargo_weight()"
+                   onfocus="this.select()"/>
 
-        <label>PI lbs:</label>
-        <input class="answer"
-               id="pi_lbs"
-               type="tel"
-               name="pi_lbs"
-               onkeyup="return cargo_weight()" /> <br>
+            <label>PI lbs:</label>
+            <input class="answer"
+                   id="pi_lbs"
+                   type="tel"
+                   name="pi_lbs"
+                   onkeyup="return cargo_weight()" /> <br>
 
-        <br>
+            <br>
 
-        <script>
 
-            function cleanup_input() {
-                var the_form = document.forms["form1"];
-                var field_stand_bags = the_form.elements["bag_stand"];
-                var field_valet_bags = the_form.elements["bag_valet"];
-                var field_heavy_bags = the_form.elements["bag_heavy"];
-                var field_misc_cargo = the_form.elements["bag_cargo"];
-                var field_pax_num = the_form.elements["pax_num"];
+            <br>
 
-                if(isNaN(parseInt(field_stand_bags.value))) {
-                   field_stand_bags.value = "";
-                }
-                if(isNaN(parseInt(field_valet_bags.value))) {
-                   field_valet_bags.value = "";
-                }
-                if(isNaN(parseInt(field_heavy_bags.value))) {
-                   field_heavy_bags.value = "";
-                }
-                if(isNaN(parseInt(field_misc_cargo.value))) {
-                   field_misc_cargo.value = "";
-                }
-                if(isNaN(parseInt(field_pax_num.value))) {
-                   field_pax_num.value = "";
-                }
-            }
-
-            function cargo_weight() {
-                cleanup_input();
-
-                var the_form = document.forms["form1"];
-
-                var standard_bags = the_form.elements["bag_stand"];
-                var num_standard_bags = 0;
-                if(standard_bags.value!="") {
-                    num_standard_bags = parseInt(standard_bags.value);
-                }
-
-                var valet_bags = the_form.elements["bag_valet"];
-                var num_valet_bags = 0;
-                if(valet_bags.value!="") {
-                    num_valet_bags = parseInt(valet_bags.value);
-                }
-
-                var heavy_bags = the_form.elements["bag_heavy"];
-                var num_heavy_bags = 0;
-                if(heavy_bags.value!="") {
-                    num_heavy_bags = parseInt(heavy_bags.value);
-                }
-
-                var cargo_lbs = the_form.elements["bag_cargo"];
-                var lbs_misc_cargo = 0;
-                if(cargo_lbs.value!="") {
-                    lbs_misc_cargo = parseInt(cargo_lbs.value);
-                }
-
-                var total_cargo_weight = num_standard_bags*28 + num_valet_bags*20 + num_heavy_bags*56 + lbs_misc_cargo;
-                document.getElementById("answer").value = total_cargo_weight;
-
-                var pax_num_field = the_form.elements["pax_num"];
-                var number_of_passengers = 0
-                if(pax_num_field.value!="") {
-                    number_of_passengers = parseInt(pax_num_field.value);
-                }
-
-                var pi_weight = number_of_passengers*11;
-                var pi_lbs = the_form.elements["pi_lbs"];
-                pi_lbs.value = pi_weight;
-
-            }
-
-            function clear_all() {
-
-                var the_form = document.forms["form1"];
-                var field_stand_bags = the_form.elements["bag_stand"];
-                var field_valet_bags = the_form.elements["bag_valet"];
-                var field_heavy_bags = the_form.elements["bag_heavy"];
-                var field_misc_cargo = the_form.elements["bag_cargo"];
-                var field_calc = the_form.elements["answer"];
-                var field_pax_num = the_form.elements["pax_num"];
-                var field_pi_lbs = the_form.elements["pi_lbs"];
-
-                field_stand_bags.value = "";
-                field_valet_bags.value = "";
-                field_heavy_bags.value = "";
-                field_misc_cargo.value = "";
-                field_calc.value = "";
-                field_pax_num.value = "";
-                field_pi_lbs.value = "";
-            }
-
-        </script>
-        <br>
-
-        <input type="button" value="Clear All" onclick="clear_all()" id= "clear" >
-        <br>
-
-    </form>
-</div>
+            <input type="button" value="Clear All" onclick="clear_all()" id= "clear" >
+            <br>
+        </form>
+    </div>
 </body>
 </html>
