@@ -64,7 +64,6 @@
 </style>
 
 <script>
-
     function cleanup_input() {
         var the_form = document.forms["form1"];
         var field_stand_bags = the_form.elements["bag_stand"];
@@ -73,27 +72,27 @@
         var field_misc_cargo = the_form.elements["bag_cargo"];
         var field_pax_num = the_form.elements["pax_num"];
 
-        field_stand_bags.value = field_stand_bags.value.split(" ").join("");
+        field_stand_bags.value = field_stand_bags.value.replace(/\D/g,'');
         if(isNaN(parseInt(field_stand_bags.value))) {
            field_stand_bags.value = "";
         }
 
-        field_valet_bags.value = field_valet_bags.value.split(" ").join("");
+        field_valet_bags.value = field_valet_bags.value.replace(/\D/g,'');
         if(isNaN(parseInt(field_valet_bags.value))) {
            field_valet_bags.value = "";
         }
 
-        field_heavy_bags.value = field_heavy_bags.value.split(" ").join("");
+        field_heavy_bags.value = field_heavy_bags.value.replace(/\D/g,'');
         if(isNaN(parseInt(field_heavy_bags.value))) {
            field_heavy_bags.value = "";
         }
 
-        field_misc_cargo.value = field_misc_cargo.value.split(" ").join("");
+        field_misc_cargo.value = field_misc_cargo.value.replace(/\D/g,'');
         if(isNaN(parseInt(field_misc_cargo.value))) {
            field_misc_cargo.value = "";
         }
 
-        field_pax_num.value = field_pax_num.value.split(" ").join("");
+        field_pax_num.value = field_pax_num.value.replace(/\D/g,'');
         if(isNaN(parseInt(field_pax_num.value))) {
            field_pax_num.value = "";
         }
@@ -168,7 +167,6 @@
         field_pax_num.value = "";
         field_pi_lbs.value = "";
     }
-
 </script>
 
 <title> 'Aha! Weights' </title>
